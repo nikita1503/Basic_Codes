@@ -1,0 +1,41 @@
+//Get Hash using Rabin-Karp
+// Input String - s, p, mod
+// hash(l,r) = ( s[l]*p^0 + s[l+1]*p^1 + s[l+2]*p^2 + ... + s[r]*p^(r-l-1) )%mod
+// l,r are 0-indexed
+// Complexity - preparation - O(n) , Query - O(1)
+struct Hashs 
+{
+	vector<int> hashs;
+	vector<int> pows;
+	int P;
+	int MOD;
+
+	Hashs() {}
+
+	Hashs(string &s, int P, int MOD) : P(P), MOD(MOD) 
+	{
+		int n = s.size();
+		pows.resize(n+1, 0);
+		hashs.resize(n+1, 0);
+		pows[0] = 1;
+		for(int i=n-1;i>=0;i--) 
+		{
+			hashs[i]=(1LL * hashs[i+1] * P + s[i] - 'a' + 1) % MOD;
+			pows[n-i]=(1LL * pows[n-i-1] * P) % MOD;
+		}
+		pows[n] = (1LL * pows[n-1] * P)%MOD;
+	}
+	int get_hash(int l, int r) 
+	{
+		int ans=hashs[l] + MOD - (1LL*hashs[r+1]*pows[r-l+1])%MOD;
+		ans%=MOD;
+		return ans;
+	}
+};
+
+int main()
+{
+  Hashs myHash(s, p, modulo);
+  
+  int hashLR = myHash.get_hash(l,r
+)}
