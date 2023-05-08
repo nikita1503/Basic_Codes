@@ -4,45 +4,67 @@
 //****************BLACKBOX START*****************
 //START COPYING FROM HERE
 class Graph {
-  public:
-   
-    Graph(int num_nodes) 
-      : adj_list(num_nodes), dist(num_nodes, -1) {}
+	vector<vector<pair<int,ll>>>adj;
+	int n;
+	bool is_directed;
+	
+	public:
+		vector<ll>min_dist_from_source;
+		Graph(int n_, bool is_directed_){
+			n=n_; is_directed = is_directed_;
+			adj.resize(n,vector<pair<int,ll>>());
+		}
 
-    void add_edge(int start, int end);
-    vector<vector<int>> adj_list;
-    vector<int> dist;
+		bool node_has_edges(int u) {
+			return (adj[u].size()!=0);
+		}
+		void add_edge(int u, int v, ll c=0){
+			add_edge_weighted_undirected(u,v,c);
+			if(!is_directed)
+				add_edge_weighted_undirected(v,u,c);
+		}
+
+		void BFS(int source, bool clean=false){
+			if(min_dist_from_source.size()==0)
+				min_dist_from_source.resize(n,-1);
+			else if(clean) {
+				min_dist_from_source.clear();
+				min_dist_from_source.resize(n,-1);
+			}
+
+			vector<bool> visited(n, false);
+			queue<int> q;
+			q.push(source);
+			
+			visited[source] = true;
+			min_dist_from_source[source] = 0;
+			
+			while(!q.empty()) {
+				int cur_node = q.front();
+				vector<pair<int,ll>> cur_node_adj = adj[cur_node];
+			
+				for (unsigned int i = 0; i < cur_node_adj.size(); ++i) {
+					int adj_node = cur_node_adj[i].first;
+					if (visited[adj_node] == false) {
+						visited[adj_node] = true;
+						min_dist_from_source[adj_node] = min_dist_from_source[cur_node] + 1;
+						q.push(adj_node);
+					}
+				}
+				q.pop();
+			}
+			
+			return;
+		}
+
+	private :
+		void add_edge_weighted_undirected(int u, int v, ll c) {
+			pair<int,ll>p = make_pair(v,c);
+			adj[u].push_back(p);
+		}
+	
 };
 
-void Graph::add_edge(int start, int end) {
-  adj_list[start].push_back(end);
-}
-
-vector<int> BFS(Graph& g, int source) {
-  vector<bool> visited(g.adj_list.size(), false);
-  queue<int> q;
-  q.push(source);
- 
-  visited[source] = true;
-  g.dist[source] = 0;
-
-  while(!q.empty()) {
-    int cur_node = q.front();
-    vector<int> cur_node_adj = g.adj_list[cur_node];
-   
-    for (unsigned int i = 0; i < cur_node_adj.size(); ++i) {
-      int adj_node = cur_node_adj[i];
-      if (visited[adj_node] == false) {
-        visited[adj_node] = true;
-        g.dist[adj_node] = g.dist[cur_node] + 1;
-        q.push(adj_node);
-      }
-    }
-    q.pop();
-  }
-  
-  return g.dist;
-}
 //END COPYING HERE
 //********************BLACKBOX END******************
 
@@ -62,9 +84,10 @@ int main() {
   g.add_edge(3,1);
  
   //do BFS on the graph g start at `Node 2`
-  //An array of size "number of nodes" is returned with the minimum distance from `Node 2` to each node, i.e. `shortest path length from Node 2 -> Node 3 = min_dist[3] `
+  //An array `min_dist_from_source` of size "number of nodes" is created int the class with the minimum distance from `Node 2` to each node, i.e. `shortest path length from Node 2 -> Node 3 = min_dist[3] `
   //If a `Node i` is unreachable from `Node 2`, then `min_dist[i]=-1` 
-  vector<int>min_dist = BFS(g, 2);
+  BFS(g, 2);
+  vector<int>min_dist = g.min_dist_from_source[target]
  
 
   return 0;
