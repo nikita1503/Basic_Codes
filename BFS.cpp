@@ -70,23 +70,20 @@ class Graph {
 
 
 int main() {
-   // initaitise a graph with 4 nodes, nodes are 0-indexed
-  Graph g(4);
+   // Initialise graph; input = number of nodes, is_directed
+  Graph g(4, false);
   
-  //DIRECTED GRAPH : add edges `Node 0 -> Node 4` and `Node 1 -> Node 3`
-  g.add_edge(0,4);
-  g.add_edge(1,3);
-  
-  //UNDIRECT GRAPH : add edges between `Node 0 -- Node 4` and `Node 1 -- Node 3`
-  g.add_edge(0,4);
-  g.add_edge(4,0);
-  g.add_edge(1,3);
-  g.add_edge(3,1);
+  // Add Weighted edge
+  g.add_edge(u,v,weight);
+	
+  // Add Un-Weighted edge
+  g.add_edge(u,v);
  
-  //do BFS on the graph g start at `Node 2`
-  //An array `min_dist_from_source` of size "number of nodes" is created int the class with the minimum distance from `Node 2` to each node, i.e. `shortest path length from Node 2 -> Node 3 = min_dist[3] `
+  //do BFS on the graph g start at Source
+  //An array `min_dist_from_source` of size "number of nodes" is created in the class with the minimum distance from Source to each node, i.e. `shortest path length from Node 2 -> Node 3 = min_dist[3] `
   //If a `Node i` is unreachable from `Node 2`, then `min_dist[i]=-1` 
-  BFS(g, 2);
+  //if running BFS multiple times and want to clear previous minimum distances then do g.BFS(source, true)
+  g.BFS(source);
   vector<int>min_dist = g.min_dist_from_source[target]
  
 
