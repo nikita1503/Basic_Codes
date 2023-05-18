@@ -1,3 +1,4 @@
+//USE WITH CLASS GRAPH
 class TopologicalSort{
       public:
           TopologicalSort(Graph *g_) {
@@ -37,3 +38,14 @@ class TopologicalSort{
               else possible = true;
           }
   };
+
+//USAGE
+TopologicalSort topologicalSort(&g); 
+
+//state is maintained across multiple runs
+topologicalSort.run();
+
+topologicalSort.levels // total number of levels after topological sorting
+topologicalSort.possible //boolean value indicating of topological sorting is possible (topo sorting not possible for cycles)
+topologicalSort.ordered //n-sized vector with topo-sorted nodes
+topologicalSort.nodeLevel[i] //level (0-indexed) of node i in the sorting 
