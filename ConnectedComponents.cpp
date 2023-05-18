@@ -1,3 +1,4 @@
+//USE WITH CLASS GRAPH
 class ConnectedComponents {
       Graph *g;
       vector<bool>visited;
@@ -20,8 +21,16 @@ class ConnectedComponents {
               visited.resize((g->n),false);
               for(int i=0;i<(g->n);i++)
                   if(!visited[i]){
-                      count++; dfs(i,count);
+                      count++; dfs(i,count-1);
                   }
            }
 
   };
+//USAGE
+ConnectedComponents conComp(&g);
+
+//state is maintained across multiple runs
+conComp.run();
+
+conComp.count // number of connected components in the graph
+conComp.nodeInComponent[i] //componenet id (0-indexed) of a node
