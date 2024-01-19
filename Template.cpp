@@ -12,5 +12,6 @@ typedef vector<ll> VL;
 typedef pair<ll,ll> PLL;
 const ll mod=1000000007;
 ll powmod(ll a,ll b) {ll res=1;a%=mod; assert(b>=0); for(;b;b>>=1){if(b&1)res=res*a%mod;a=a*a%mod;}return res;}
+void printV(VI&v) {REP(i,v.size())cout<<v[i]<<' ';cout<<'\n';};
+void printV(VL&v) {REP(i,v.size())cout<<v[i]<<' ';cout<<'\n';};
 //Your magic 😉
-
