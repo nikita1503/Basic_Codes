@@ -18,11 +18,21 @@ typedef long double ld;
 typedef vector<int> VI;
 typedef pair<int,int> PII;
 typedef vector<ll> VL;
-typedef pair<ll,ll> PLL;
 typedef vector<vector<int>> VVI;
+typedef pair<ll,ll> PLL;
 const ll mod=1000000007;
 const ll INF=1000000007;
 ll powmod(ll a,ll b) {ll res=1;a%=mod; assert(b>=0); for(;b;b>>=1){if(b&1)res=res*a%mod;a=a*a%mod;}return res;}
 void printV(VI&v) {REP(i,v.size())cout<<v[i]<<' ';cout<<'\n';};
 void printV(VL&v) {REP(i,v.size())cout<<v[i]<<' ';cout<<'\n';};
 //Your magic 	
+int solve(){
+    
+     return 0;
+}
+void tests() {int t; cin>>t;while(t--){cout<<solve()<<'\n';}}
+//void tests() {int t; cin>>t;while(t--){solve();}}
+
+int main(){tests(); return 0;}
+//int main(){cout<<solve()<<'\n'; return 0;}
+//int main(){solve(); return 0;}
