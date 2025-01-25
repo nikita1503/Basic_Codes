@@ -25,10 +25,17 @@ const ll INF=1000000007;
 ll powmod(ll a,ll b) {ll res=1;a%=mod; assert(b>=0); for(;b;b>>=1){if(b&1)res=res*a%mod;a=a*a%mod;}return res;}
 void printV(VI&v) {REP(i,v.size())cout<<v[i]<<' ';cout<<'\n';};
 void printV(VL&v) {REP(i,v.size())cout<<v[i]<<' ';cout<<'\n';};
+template <typename T>
+T getValueAtIndex(const vector<T>& arr, int index, T defaultValue = T()) {
+    if (index >= 0 && index < arr.size()) {
+        return arr[index];
+    }
+    return defaultValue;
+}
 //Your magic 	
 int solve(){
     
-     return 0;
+    return 0;
 }
 void tests() {int t; cin>>t;while(t--){cout<<solve()<<'\n';}}
 //void tests() {int t; cin>>t;while(t--){solve();}}
