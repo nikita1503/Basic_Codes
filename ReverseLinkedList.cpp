@@ -1,3 +1,6 @@
+//Reverse partial or whole linkedList
+//Time Complexity - O(n), Space Complexity - O(1)
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
